@@ -6,14 +6,14 @@
 // =============================================================
 
 // Requiring our models
-var db = require("../models");
+var db = require('../models');
 
 // Routes
 // =============================================================
 module.exports = function(app) {
 
   // GET route for getting all of the questions
-  app.get("/api/questions", function(req, res) {
+  app.get('/api/questions', function(req, res) {
     var query = {};
     if (req.query.quiz_id) {
       query.QuizId = req.query.quiz_id;
@@ -29,7 +29,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/questions/quiz/:QuizId", function(req, res) {
+  app.get('/api/questions/quiz/:QuizId', function(req, res) {
     db.Question.findAll({
       where: {
         QuizId: req.params.QuizId
@@ -41,7 +41,7 @@ module.exports = function(app) {
   });
 
   // Get route for retrieving a single question
-  app.get("/api/questions/:id", function(req, res) {
+  app.get('/api/questions/:id', function(req, res) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Quiz
@@ -56,14 +56,14 @@ module.exports = function(app) {
   });
 
   // POST route for saving a new question
-  app.post("/api/questions", function(req, res) {
+  app.post('/api/questions', function(req, res) {
     db.Question.create(req.body).then(function(dbQuestion) {
       res.json(dbQuestion);
     });
   });
 
   // DELETE route for deleting questions
-  app.delete("/api/questions/:id", function(req, res) {
+  app.delete('/api/questions/:id', function(req, res) {
     db.Question.destroy({
       where: {
         id: req.params.id
@@ -74,7 +74,7 @@ module.exports = function(app) {
   });
 
   // PUT route for updating questions
-  app.put("/api/questions", function(req, res) {
+  app.put('/api/questions', function(req, res) {
     db.Question.update(
       req.body,
       {

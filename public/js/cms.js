@@ -1,11 +1,11 @@
 $(document).ready(function() {
   // Getting jQuery references to the question body, title, form, and quiz select
-  var bodyInput = $("#body");
-  var titleInput = $("#title");
-  var cmsForm = $("#cms");
-  var quizSelect = $("#quiz");
+  var bodyInput = $('#body');
+  var titleInput = $('#title');
+  var cmsForm = $('#cms');
+  var quizSelect = $('#quiz');
   // Adding an event listener for when the form is submitted
-  $(cmsForm).on("submit", handleFormSubmit);
+  $(cmsForm).on('submit', handleFormSubmit);
   // Gets the part of the url that comes after the "?" (which we have if we're updating a question)
   var url = window.location.search;
   var questionId;
@@ -15,13 +15,13 @@ $(document).ready(function() {
 
   // If we have this section in our url, we pull out the question id from the url
   // In '?question_id=1', questionId is 1
-  if (url.indexOf("?question_id=") !== -1) {
-    questionId = url.split("=")[1];
-    getQuestionData(questionId, "question");
+  if (url.indexOf('?question_id=') !== -1) {
+    questionId = url.split('=')[1];
+    getQuestionData(questionId, 'question');
   }
   // Otherwise if we have an quiz_id in our url, preset the quiz select box to be our Quiz
-  else if (url.indexOf("?quiz_id=") !== -1) {
-    quizId = url.split("=")[1];
+  else if (url.indexOf('?quiz_id=') !== -1) {
+    quizId = url.split('=')[1];
   }
 
   // Getting the quizs, and their questions
@@ -50,16 +50,15 @@ $(document).ready(function() {
     if (updating) {
       newQuestion.id = questionId;
       updateQuestion(newQuestion);
-    }
-    else {
+    } else {
       submitQuestion(newQuestion);
     }
   }
 
   // Submits a new question and brings user to blog page upon completion
   function submitQuestion(question) {
-    $.post("/api/questions", question, function() {
-      window.location.href = "/blog";
+    $.post('/api/questions', question, function() {
+      window.location.href = '/blog';
     });
   }
 
@@ -67,11 +66,11 @@ $(document).ready(function() {
   function getQuestionData(id, type) {
     var queryUrl;
     switch (type) {
-    case "question":
-      queryUrl = "/api/questions/" + id;
+    case 'question':
+      queryUrl = '/api/questions/' + id;
       break;
-    case "quiz":
-      queryUrl = "/api/quizs/" + id;
+    case 'quiz':
+      queryUrl = '/api/quizs/' + id;
       break;
     default:
       return;
@@ -92,15 +91,15 @@ $(document).ready(function() {
 
   // A function to get Quizs and then render our list of Quizs
   function getQuizs() {
-    $.get("/api/quizs", renderQuizList);
+    $.get('/api/quizs', renderQuizList);
   }
   // Function to either render a list of quizs, or if there are none, direct the user to the page
   // to create an quiz first
   function renderQuizList(data) {
     if (!data.length) {
-      window.location.href = "/quizs";
+      window.location.href = '/quizs';
     }
-    $(".hidden").removeClass("hidden");
+    $('.hidden').removeClass('hidden');
     var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
       rowsToAdd.push(createQuizRow(data[i]));
@@ -114,8 +113,8 @@ $(document).ready(function() {
 
   // Creates the quiz options in the dropdown
   function createQuizRow(quiz) {
-    var listOption = $("<option>");
-    listOption.attr("value", quiz.id);
+    var listOption = $('<option>');
+    listOption.attr('value', quiz.id);
     listOption.text(quiz.name);
     return listOption;
   }
@@ -123,12 +122,12 @@ $(document).ready(function() {
   // Update a given question, bring user to the blog page when done
   function updateQuestion(question) {
     $.ajax({
-      method: "PUT",
-      url: "/api/questions",
+      method: 'PUT',
+      url: '/api/questions',
       data: question
     })
       .then(function() {
-        window.location.href = "/blog";
+        window.location.href = '/blog';
       });
   }
 });
