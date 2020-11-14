@@ -1,65 +1,40 @@
-require("dotenv").config();
-
-// Requiring necessary npm packages
-const express = require("express");
-const session = require("express-session");
-// Requiring passport as we've configured it
-const passport = require("./config/passport");
-
-// Requiring our routes
-const routes = require("./controllers");
-
-// Setting up port and requiring models for syncing
-const PORT = process.env.PORT || 8080;
-const db = require("./models");
-
-// Bringing in Morgan, a nice logger for our server
+// *****************************************************************************
+// Server.js - This file is the initial starting point for the Node/Express server.
+//
+// ******************************************************************************
+// *** Dependencies
+// =============================================================
+var express = require("express");
 const morgan = require("morgan");
 
-// Requiring handlebars!
-const exphbs = require("express-handlebars");
+// Sets up the Express App
+// =============================================================
+var app = express();
+var PORT = process.env.PORT || 8080;
 
-// Creating express app and configuring middleware needed for authentication
-const app = express();
+// Requiring our models for syncing
+var db = require("./models");
 
-// Set up our middleware!
-app.use(morgan("dev"));
+// Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(morgan("dev"));
+// Static directory
 app.use(express.static("public"));
-// We need to use sessions to keep track of our user's login status
-app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-);
-app.use(passport.initialize());
-app.use(passport.session());
 
-// Set up handlebars
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-// Add all our routes
-app.use(routes);
-
-const config = { force: false };
+// Routes
+// =============================================================
+require("./routes/html-routes.js")(app);
+require("./routes/quiz-api-routes.js")(app);
+require("./routes/question-api-routes.js")(app);
+let config = { force: true };
 if (process.env.NODE_ENV === "test") {
   config.force = true;
 }
-// if we need it! {force:true}
-// Syncing our database and logging a message to the user upon success
-db.sequelize.sync(config).then(() => {
-  if (process.env.NODE_ENV === "test") {
-    db.User.create({ email: "test@test.com", password: "password" }).then(
-      () => {
-        console.log("Test User Created");
-      }
-    );
-  }
-  app.listen(PORT, () => {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+db.sequelize.sync(config).then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
   });
 });
