@@ -46,22 +46,22 @@ Joseph Jepson, Alex Dospinoiu, Jake Ehmann
  ```
 
 ## Credits: 
-```
+
 * 👤 [Joseph Jepson](https://github.com/alligatormonday) - worked together to help complete this assignment. 
 * 👤 [Alex Dospinoiu](https://github.com/adospinoiu) - worked together to help complete this assignment. 
 * 👤 [Jake Ehmann](https://github.com/jakeehmann42) - worked together to help complete this assignment. 
 * 👤 [Steven Tang](https://github.com/Sltang0815) - worked together to help complete this assignment. 
-```
+
 
 ## Testing: 
 
   ## Contact: 
-  ```
+  
  
   * 💌  Email: 
  
   * 👤  GitHub Username: []() 
-  ```
+  
 
   ## License: 
  
