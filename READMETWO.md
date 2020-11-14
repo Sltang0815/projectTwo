@@ -56,12 +56,12 @@ Joseph Jepson, Alex Dospinoiu, Jake Ehmann
 ## Testing: 
 
   ## Contact: 
-  ```
+  
  
   * 💌  Email: 
  
   * 👤  GitHub Username: []() 
-  ```
+  
 
   ## License: 
  
