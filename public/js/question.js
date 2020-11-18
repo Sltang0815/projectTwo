@@ -58,7 +58,7 @@ $(document).ready(function() {
   // Submits a new question and brings user to blog page upon completion
   function submitQuestion(question) {
     $.post('/api/questions', question, function() {
-      window.location.href = '/blog';
+      window.location.href = '/quiz';
     });
   }
 
@@ -97,7 +97,7 @@ $(document).ready(function() {
   // to create an quiz first
   function renderQuizList(data) {
     if (!data.length) {
-      window.location.href = '/quizs';
+      window.location.href = '/quizzes';
     }
     $('.hidden').removeClass('hidden');
     var rowsToAdd = [];
@@ -127,7 +127,7 @@ $(document).ready(function() {
       data: question
     })
       .then(function() {
-        window.location.href = '/blog';
+        window.location.href = '/quiz';
       });
   }
 });
