@@ -4,32 +4,67 @@
 
 // Dependencies
 // =============================================================
-var path = require('path');
+const isAuthenticated = require('../config/middleware/isAuthenticated');
 
 // Routes
 // =============================================================
 module.exports = function(app) {
 
+  /**
+ * Home Page
+ */
+  app.get('/', function(req, res) {
+    res.render('index', { user: req.user });
+  });
+
+  /**
+ * Home Page, again
+ */
+  app.get('/home', function(req, res) {
+    res.render('index', { user: req.user });
+  });
+
+  /**
+ * Signup page
+ */
+  app.get('/signup', function(req, res) {
+    if (req.user) {
+      res.redirect('/');
+    } else {
+      res.render('signup', { user: req.user });
+    }
+  });
+
+  /**
+ * Login page
+ */
+  app.get('/login', function(req, res) {
+    if (req.user) {
+      res.redirect('/');
+    } else {
+      res.render('login', { user: req.user });
+    }
+  });
+
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   // index route loads view.html
-  app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/blog.html'));
+  app.get('/quiz', isAuthenticated, function(req, res) {
+    res.render('quiz', { user: req.user });
   });
 
   // cms route loads cms.html
-  app.get('/cms', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/cms.html'));
+  app.get('/question', isAuthenticated, function(req, res) {
+    res.render('question', { user: req.user });
   });
 
-  // blog route loads blog.html
-  app.get('/blog', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/blog.html'));
+
+  app.get('/quizzes', isAuthenticated, function(req, res) {
+    res.render('quizzes', { user: req.user });
   });
 
-  // quizs route loads quiz-manager.html
-  app.get('/quizs', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/quiz-manager.html'));
+  app.get('/members', isAuthenticated, function(req, res) {
+    res.render('members', { user: req.user });
   });
 
 };

@@ -1,93 +1,136 @@
 $(document).ready(function() {
-  // Getting references to the name input and quiz container, as well as the table body
-  var nameInput = $('#quiz-name');
-  var quizList = $('tbody');
-  var quizContainer = $('.quiz-container');
-  // Adding event listeners to the form to create a new object, and the button to delete
-  // an Quiz
-  $(document).on('submit', '#quiz-form', handleQuizFormSubmit);
-  $(document).on('click', '.delete-quiz', handleDeleteButtonPress);
+  // blogContainer holds all of our questions
+  var blogContainer = $('.blog-container');
+  var questionCategorySelect = $('#category');
+  // Click events for the edit and delete buttons
+  $(document).on('click', 'button.delete', handleQuestionDelete);
+  $(document).on('click', 'button.edit', handleQuestionEdit);
+  // Variable to hold our questions
+  var questions;
 
-  // Getting the initial list of Quizs
-  getQuizs();
+  // The code below handles the case where we want to get blog questions for a specific quiz
+  // Looks for a query param in the url for quiz_id
+  var url = window.location.search;
+  var quizId;
+  if (url.indexOf('?quiz_id=') !== -1) {
+    quizId = url.split('=')[1];
+    getQuestions(quizId);
+  }
+  // If there's no quizId we just get all questions as usual
+  else {
+    getQuestions();
+  }
 
-  // A function to handle what happens when the form is submitted to create a new Quiz
-  function handleQuizFormSubmit(event) {
-    event.preventDefault();
-    // Don't do anything if the name fields hasn't been filled out
-    if (!nameInput.val().trim().trim()) {
-      return;
+  // This function grabs questions from the database and updates the view
+  function getQuestions(quiz) {
+    quizId = quiz || '';
+    if (quizId) {
+      quizId = '/?quiz_id=' + quizId;
     }
-    // Calling the upsertQuiz function and passing in the value of the name input
-    upsertQuiz({
-      name: nameInput
-        .val()
-        .trim()
-    });
-  }
-
-  // A function for creating an quiz. Calls getQuizs upon completion
-  function upsertQuiz(quizData) {
-    $.post('/api/quizs', quizData)
-      .then(getQuizs);
-  }
-
-  // Function for creating a new list row for quizs
-  function createQuizRow(quizData) {
-    var newTr = $('<tr>');
-    newTr.data('quiz', quizData);
-    newTr.append('<td>' + quizData.name + '</td>');
-    if (quizData.Questions) {
-      newTr.append('<td> ' + quizData.Questions.length + '</td>');
-    } else {
-      newTr.append('<td>0</td>');
-    }
-    newTr.append('<td><a href=\'/blog?quiz_id=' + quizData.id + '\'>Go to Questions</a></td>');
-    newTr.append('<td><a href=\'/cms?quiz_id=' + quizData.id + '\'>Create a Question</a></td>');
-    newTr.append('<td><a style=\'cursor:pointer;color:red\' class=\'delete-quiz\'>Delete Quiz</a></td>');
-    return newTr;
-  }
-
-  // Function for retrieving quizs and getting them ready to be rendered to the page
-  function getQuizs() {
-    $.get('/api/quizs', function(data) {
-      var rowsToAdd = [];
-      for (var i = 0; i < data.length; i++) {
-        rowsToAdd.push(createQuizRow(data[i]));
+    $.get('/api/questions' + quizId, function(data) {
+      console.log('Questions', data);
+      questions = data;
+      if (!questions || !questions.length) {
+        displayEmpty(quiz);
+      } else {
+        initializeRows();
       }
-      renderQuizList(rowsToAdd);
-      nameInput.val('');
     });
   }
 
-  // A function for rendering the list of quizs to the page
-  function renderQuizList(rows) {
-    quizList.children().not(':last').remove();
-    quizContainer.children('.alert').remove();
-    if (rows.length) {
-      console.log(rows);
-      quizList.prepend(rows);
-    } else {
-      renderEmpty();
-    }
-  }
-
-  // Function for handling what to render when there are no quizs
-  function renderEmpty() {
-    var alertDiv = $('<div>');
-    alertDiv.addClass('alert alert-danger');
-    alertDiv.text('You must create an Quiz before you can create a Question.');
-    quizContainer.append(alertDiv);
-  }
-
-  // Function for handling what happens when the delete button is pressed
-  function handleDeleteButtonPress() {
-    var listItemData = $(this).parent('td').parent('tr').data('quiz');
-    var id = listItemData.id;
+  // This function does an API call to delete questions
+  function deleteQuestion(id) {
     $.ajax({
       method: 'DELETE',
-      url: '/api/quizs/' + id
+      url: '/api/questions/' + id
     })
-      .then(getQuizs);
+      .then(function() {
+        getQuestions(questionCategorySelect.val());
+      });
   }
+
+  // InitializeRows handles appending all of our constructed question HTML inside blogContainer
+  function initializeRows() {
+    blogContainer.empty();
+    var questionsToAdd = [];
+    for (var i = 0; i < questions.length; i++) {
+      questionsToAdd.push(createNewRow(questions[i]));
+    }
+    blogContainer.append(questionsToAdd);
+  }
+
+  // This function constructs a question's HTML
+  function createNewRow(question) {
+    var formattedDate = new Date(question.createdAt).toLocaleDateString();
+    var newQuestionCard = $('<div>');
+    newQuestionCard.addClass('card');
+    var newQuestionCardHeading = $('<div>');
+    newQuestionCardHeading.addClass('card-header');
+    var deleteBtn = $('<button>');
+    deleteBtn.text('x');
+    deleteBtn.addClass('delete btn btn-danger');
+    var editBtn = $('<button>');
+    editBtn.text('EDIT');
+    editBtn.addClass('edit btn btn-info');
+    var newQuestionTitle = $('<h2>');
+    var newQuestionDate = $('<small>');
+    var newQuestionQuiz = $('<h5>');
+    newQuestionQuiz.text('Written by: ' + question.Quiz.name);
+    newQuestionQuiz.css({
+      float: 'right',
+      color: 'blue',
+      'margin-top':
+      '-10px'
+    });
+    var newQuestionCardBody = $('<div>');
+    newQuestionCardBody.addClass('card-body');
+    var newQuestionBody = $('<p>');
+    newQuestionTitle.text(question.title + ' ');
+    newQuestionBody.text(question.body);
+    newQuestionDate.text(formattedDate);
+    newQuestionTitle.append(newQuestionDate);
+    newQuestionCardHeading.append(deleteBtn);
+    newQuestionCardHeading.append(editBtn);
+    newQuestionCardHeading.append(newQuestionTitle);
+    newQuestionCardHeading.append(newQuestionQuiz);
+    newQuestionCardBody.append(newQuestionBody);
+    newQuestionCard.append(newQuestionCardHeading);
+    newQuestionCard.append(newQuestionCardBody);
+    newQuestionCard.data('question', question);
+    return newQuestionCard;
+  }
+
+  // This function figures out which question we want to delete and then calls deleteQuestion
+  function handleQuestionDelete() {
+    var currentQuestion = $(this)
+      .parent()
+      .parent()
+      .data('question');
+    deleteQuestion(currentQuestion.id);
+  }
+
+  // This function figures out which question we want to edit and takes it to the appropriate url
+  function handleQuestionEdit() {
+    var currentQuestion = $(this)
+      .parent()
+      .parent()
+      .data('question');
+    window.location.href = '/question?question_id=' + currentQuestion.id;
+  }
+
+  // This function displays a message when there are no questions
+  function displayEmpty(id) {
+    var query = window.location.search;
+    var partial = '';
+    if (id) {
+      partial = ' for Quiz #' + id;
+    }
+    blogContainer.empty();
+    var messageH2 = $('<h2>');
+    messageH2.css({ 'text-align': 'center', 'margin-top': '50px' });
+    messageH2.html('No questions yet' + partial + ', navigate <a href=\'/question' + query +
+    '\'>here</a> in order to get started.');
+    blogContainer.append(messageH2);
+  }
+
 });
