@@ -1,5 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
   var Question = sequelize.define('Question', {
+    Answers: {
+      type: DataTypes.Array,
+      validate: {
+        lem: [1]
+      }
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,

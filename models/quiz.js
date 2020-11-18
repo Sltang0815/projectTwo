@@ -1,7 +1,24 @@
+const { INTEGER } = require("sequelize");
+
 module.exports = function (sequelize, DataTypes) {
-  var Quiz = sequelize.define('Quiz', {
+  let Quiz = sequelize.define('Quiz', {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    difficulty: {
+      type: INTEGER,
+
+    },
+    body: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    }
     // Giving the Quiz model a name of type STRING
-    name: DataTypes.STRING
   });
 
   Quiz.associate = function (models) {
