@@ -7,6 +7,7 @@ module.exports = function (app) {
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   app.post('/auth/login', passport.authenticate('local'), (req, res) => {
+    console.log('From login handler');
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       username: req.user.username,
@@ -18,6 +19,7 @@ module.exports = function (app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post('/auth/signup', (req, res) => {
+    console.log('From sign-up handler');
     db.User.create({
       username: req.body.username,
       password: req.body.password
@@ -31,7 +33,8 @@ module.exports = function (app) {
   });
 
   // Route for logging user out
-  app.get('/logout', (req, res) => {
+  app.get('/auth/logout', (req, res) => {
+    console.log('from logout handler');
     req.logout();
     res.redirect('/');
   });

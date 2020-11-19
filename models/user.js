@@ -56,10 +56,10 @@ module.exports = function (sequelize, DataTypes) {
     User.hasMany(models.Quiz, {
       onDelete: 'cascade'
     });
-  };
-  User.hasMany(models.Score, {
-    onDelete: 'cascade'
-  });
 
+    User.hasMany(models.Score, {
+      onDelete: 'cascade'
+    });
+  };
   return User;
 };
