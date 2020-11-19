@@ -11,6 +11,31 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
+    },
+    answerOne: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    },
+    answerTwo: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    },
+    answerThree: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    },
+    answerFour: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    },
+    correctAnswer: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
     }
   });
 
