@@ -1,7 +1,13 @@
 module.exports = function (sequelize, DataTypes) {
   var Quiz = sequelize.define('Quiz', {
     // Giving the Quiz model a name of type STRING
-    name: DataTypes.STRING
+    body: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    }
   });
 
   Quiz.associate = function (models) {
