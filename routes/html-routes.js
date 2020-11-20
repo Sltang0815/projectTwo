@@ -6,7 +6,7 @@
 // =============================================================
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const db = require('../models');
-const question = require('../models/question');
+// const question = require('../models/question');
 
 // Routes
 // =============================================================
@@ -58,9 +58,9 @@ module.exports = function(app) {
     }).then(function(questions) {
       console.log(questions);
       res.render('takequiz', { user: req.user, questions: questions});
-    })
+    });
     // pass in after req.user the results from the db call
-    
+
   });
 
   // Each of the below routes just handles the HTML page that the user gets sent to.
