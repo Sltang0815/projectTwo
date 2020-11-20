@@ -42,7 +42,7 @@ require('./routes/html-routes.js')(app);
 require('./routes/quiz-api-routes.js')(app);
 require('./routes/question-api-routes.js')(app);
 require('./routes/user-routes.js')(app);
-let config = { force: true };
+let config = { force: false };
 if (process.env.NODE_ENV === 'test') {
   config.force = true;
 }
