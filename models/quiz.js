@@ -1,9 +1,9 @@
 module.exports = function (sequelize, DataTypes) {
   var Quiz = sequelize.define('Quiz', {
     // Giving the Quiz model a name of type STRING
-    body: {
+    name: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
