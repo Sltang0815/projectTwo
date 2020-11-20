@@ -49,6 +49,8 @@ $(document).ready(function() {
       });
   }
 
+
+
   // InitializeRows handles appending all of our constructed question HTML inside blogContainer
   function initializeRows() {
     blogContainer.empty();
@@ -61,7 +63,7 @@ $(document).ready(function() {
 
   // This function constructs a question's HTML
   function createNewRow(question) {
-    var formattedDate = new Date(question.createdAt).toLocaleDateString();
+    // var formattedDate = new Date(question.createdAt).toLocaleDateString();
     var newQuestionCard = $('<div>');
     newQuestionCard.addClass('card');
     var newQuestionCardHeading = $('<div>');
@@ -72,10 +74,13 @@ $(document).ready(function() {
     var editBtn = $('<button>');
     editBtn.text('EDIT');
     editBtn.addClass('edit btn btn-info');
+    let quizBtn = $('<button>');
+    quizBtn.text('Take quiz');
+    quizBtn.addClass('quizBtn btn btn-primary');
     var newQuestionTitle = $('<h2>');
-    var newQuestionDate = $('<small>');
+    // var newQuestionDate = $('<small>');
     var newQuestionQuiz = $('<h5>');
-    newQuestionQuiz.text('Written by: ' + question.Quiz.name);
+    newQuestionQuiz.text('Quiz Name: ' + question.Quiz.name);
     newQuestionQuiz.css({
       float: 'right',
       color: 'blue',
@@ -83,14 +88,15 @@ $(document).ready(function() {
       '-10px'
     });
     var newQuestionCardBody = $('<div>');
-    newQuestionCardBody.addClass('card-body');
+    // newQuestionCardBody.addClass('card-body');
     var newQuestionBody = $('<p>');
-    newQuestionTitle.text(question.title + ' ');
-    newQuestionBody.text(question.body);
-    newQuestionDate.text(formattedDate);
-    newQuestionTitle.append(newQuestionDate);
+    // newQuestionTitle.text(question.title + ' ');
+    // newQuestionBody.text(question.body);
+    // newQuestionDate.text(formattedDate);
+    // newQuestionTitle.append(newQuestionDate);
     newQuestionCardHeading.append(deleteBtn);
     newQuestionCardHeading.append(editBtn);
+    newQuestionCardHeading.append(quizBtn);
     newQuestionCardHeading.append(newQuestionTitle);
     newQuestionCardHeading.append(newQuestionQuiz);
     newQuestionCardBody.append(newQuestionBody);
@@ -128,7 +134,7 @@ $(document).ready(function() {
     blogContainer.empty();
     var messageH2 = $('<h2>');
     messageH2.css({ 'text-align': 'center', 'margin-top': '50px' });
-    messageH2.html('No questions yet' + partial + ', navigate <a href=\'/question' + query +
+    messageH2.html('No quizzes yet' + partial + ', navigate <a href=\'/question' + query +
     '\'>here</a> in order to get started.');
     blogContainer.append(messageH2);
   }

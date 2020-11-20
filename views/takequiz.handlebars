@@ -1,0 +1,42 @@
+{{> navbar user}}
+{{#each questions}}
+<div class="card">
+    <div class="card-body">
+        
+        {{this.title}}
+        <button>{{this.answerOne}}</button>
+    </div>
+</div>
+{{/each}}
+
+
+
+<div class="input-group">
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+            <input type="radio" aria-label="Radio button for following text input">
+        </div>
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with radio button">
+</div>
+
+
+<div class="input-group">
+    <input id="answerOne" name="answerOne" placeholder="Answer a" type="radio" class="form-control"
+        aria-label="Text input with radio button">
+</div>
+<div class="input-group">
+    <input id="answerTwo" name="answerTwo" placeholder="Answer b" type="text" class="form-control"
+        aria-label="Text input with radio button">
+</div>
+<div class="input-group">
+    <input id="answerThree" name="answerThree" placeholder="Answer c" type="text" class="form-control"
+        aria-label="Text input with radio button">
+</div>
+<div class="input-group">
+    <input id="answerFour" name="answerFour" placeholder="Answer d" type="text" class="form-control"
+        aria-label="Text input with radio button">
+</div>
+
+{{!-- for handlebars {{#each question and radio button for each individual}}
+{{!-- create logic for checking the correct answer and push to score --}}

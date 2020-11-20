@@ -5,6 +5,8 @@
 // Dependencies
 // =============================================================
 const isAuthenticated = require('../config/middleware/isAuthenticated');
+const db = require('../models');
+const question = require('../models/question');
 
 // Routes
 // =============================================================
@@ -46,6 +48,21 @@ module.exports = function(app) {
     }
   });
 
+  app.get('/takequiz/:id', isAuthenticated, function(req, res) {
+    // api call to db.Quiz passing in id
+    db.Question.findAll({
+      raw: true,
+      where: {
+        QuizId: req.params.id
+      },
+    }).then(function(questions) {
+      console.log(questions);
+      res.render('takequiz', { user: req.user, questions: questions});
+    })
+    // pass in after req.user the results from the db call
+    
+  });
+
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   // index route loads view.html
@@ -66,5 +83,6 @@ module.exports = function(app) {
   app.get('/members', isAuthenticated, function(req, res) {
     res.render('members', { user: req.user });
   });
+
 
 };
