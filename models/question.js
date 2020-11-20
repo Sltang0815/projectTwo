@@ -7,11 +7,6 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    body: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      len: [1]
-    },
     answerOne: {
       type: DataTypes.TEXT,
       allowNull: false,

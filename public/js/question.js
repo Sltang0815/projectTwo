@@ -1,9 +1,13 @@
 $(document).ready(function() {
   // Getting jQuery references to the question body, title, form, and quiz select
-  var bodyInput = $('#body');
   var titleInput = $('#title');
   var cmsForm = $('#cms');
   var quizSelect = $('#quiz');
+  let answerOneInput = $('#answerOne');
+  let answerTwoInput = $('#answerTwo');
+  let answerThreeInput = $('#answerThree');
+  let answerFourInput = $('#answerFour');
+  let correctAnswerSelect = $('#correctAnswer');
   // Adding an event listener for when the form is submitted
   $(cmsForm).on('submit', handleFormSubmit);
   // Gets the part of the url that comes after the "?" (which we have if we're updating a question)
@@ -31,18 +35,39 @@ $(document).ready(function() {
   function handleFormSubmit(event) {
     event.preventDefault();
     // Wont submit the question if we are missing a body, title, or quiz
-    if (!titleInput.val().trim() || !bodyInput.val().trim() || !quizSelect.val()) {
+    if (!titleInput.val().trim() || !quizSelect.val() || !answerOneInput.val().trim() || !answerTwoInput.val().trim() || !answerThreeInput.val().trim() || !answerFourInput.val().trim() || !correctAnswerSelect.val()) {
       return;
+    }
+    let correctAnswer = '';
+
+    if (correctAnswerSelect.val() === 'a'){
+      correctAnswer = answerOneInput.val().trim();
+    } else if (correctAnswerSelect.val() === 'b'){
+      correctAnswer = answerTwoInput.val().trim();
+    } else if (correctAnswerSelect.val() === 'c'){
+      correctAnswer = answerThreeInput.val().trim();
+    } else if (correctAnswerSelect.val() === 'd'){
+      correctAnswer = answerFourInput.val().trim();
     }
     // Constructing a newQuestion object to hand to the database
     var newQuestion = {
       title: titleInput
         .val()
         .trim(),
-      body: bodyInput
+      answerOne: answerOneInput
         .val()
         .trim(),
-      QuizId: quizSelect.val()
+      answerTwo: answerTwoInput
+        .val()
+        .trim(),
+      answerThree: answerThreeInput
+        .val()
+        .trim(),
+      answerFour: answerFourInput
+        .val()
+        .trim(),
+      QuizId: quizSelect.val(),
+      correctAnswer: correctAnswer
     };
 
     // If we're updating a question run updateQuestion to update a question
@@ -80,7 +105,6 @@ $(document).ready(function() {
         console.log(data.QuizId || data.id);
         // If this question exists, prefill our cms forms with its data
         titleInput.val(data.title);
-        bodyInput.val(data.body);
         quizId = data.QuizId || data.id;
         // If we have a question with this id, set a flag for us to know to update the question
         // when we hit submit

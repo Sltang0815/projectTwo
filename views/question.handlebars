@@ -1,36 +1,60 @@
-
 {{> navbar user }}
 
-	<div class="container hidden">
-		<div class="row top-30">
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/quiz">Go back</a>
-      </div>
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/quizzes">Manage Quizzes</a>
-      </div>
-    </div>
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-				<form id="cms">
-					<div class="form-group">
-						<label for="title">Title:</label>
-						<input placeholder="Question Title" type="text" class="form-control" id="title">
-						<br />
-						<label for="body">Body:</label>
-						<textarea placeholder="Question Body" class="form-control" rows="10" id="body"></textarea>
-						<div class="form-group">
-							<label for="category">Select Quiz:</label>
-							<select class="custom-select" id="quiz">
-  						</select>
-						</div>
-						<br />
-						<button type="submit" class="btn btn-success submit">Submit</button>
-					</div>
-				</form>
-			</div>
+<div class="container hidden">
+	<div class="row top-30">
+		<div class="col-md-2 col-sm-2">
+			<a class="btn btn-light" href="/quiz">Go back</a>
+		</div>
+		<div class="col-md-2 col-sm-2">
+			<a class="btn btn-light" href="/quizzes">Manage Quizzes</a>
 		</div>
 	</div>
-	<!-- Custom Script -->
-	<script src="js/question.js" type="text/javascript"></script>
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<form id="cms">
+				<div class="form-group">
+					<label for="title">Question:</label>
+					<input placeholder="Question" type="text" class="form-control" id="title">
+					<br />
+					<label for="body">Possible Answers:</label>
+					{{!-- <textarea placeholder="Question Body" class="form-control" rows="10" id="body"></textarea> --}}
+					<div class="input-group">
+						<input id="answerOne" name="answerOne" placeholder="Answer a" type="text" class="form-control"
+							aria-label="Text input with radio button">
+					</div>
+					<div class="input-group">
+						<input id="answerTwo" name="answerTwo" placeholder="Answer b" type="text" class="form-control"
+							aria-label="Text input with radio button">
+					</div>
+					<div class="input-group">
+						<input id="answerThree" name="answerThree" placeholder="Answer c" type="text"
+							class="form-control" aria-label="Text input with radio button">
+					</div>
+					<div class="input-group">
+						<input id="answerFour" name="answerFour" placeholder="Answer d" type="text" class="form-control"
+							aria-label="Text input with radio button">
+					</div>
+					<div class="form-group">
+						<label for="category">Select Quiz:</label>
+						<select class="custom-select" id="quiz">
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="category">Select Correct Answer:</label>
+						<select class="custom-select" id="correctAnswer">
+							<option value="a">a</option>
+							<option value="b">b</option>
+							<option value="c">c</option>
+							<option value="d">d</option>
+						</select>
+					</div>
 
+					<br />
+					<button type="submit" class="btn btn-success submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Custom Script -->
+<script src="js/question.js" type="text/javascript"></script>
