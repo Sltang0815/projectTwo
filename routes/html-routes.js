@@ -57,7 +57,7 @@ module.exports = function(app) {
       },
     }).then(function(questions) {
       console.log(questions);
-      res.render('takequiz', { user: req.user, questions: questions});
+      res.render('takequiz', { user: req.user, questions: questions, quizId: questions[0].QuizId});
     });
     // pass in after req.user the results from the db call
 

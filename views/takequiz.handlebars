@@ -1,29 +1,33 @@
 {{> navbar user}}
 {{#each questions}}
 <div class="card">
-    <div class="card-body">
+    <div class="card-body px-6">
         {{this.title}}
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="answerOne" id="exampleRadios1" value="option1">
+    <div class="form-check px-5">
+        <input class="form-check-input" type="radio" name="answer-{{this.id}}" id="radio-{{this.answerOne}}"
+            value="{{this.answerOne}}">
         <label class="form-check-label" for="exampleRadios1">
             {{this.answerOne}}
         </label>
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="answerTwo" id="exampleRadios1" value="option2">
+    <div class="form-check px-5">
+        <input class="form-check-input" type="radio" name="answer-{{this.id}}" id="radio-{{this.answerTwo}}"
+            value="{{this.answerTwo}}">
         <label class="form-check-label" for="exampleRadios1">
             {{this.answerTwo}}
         </label>
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="answerThree" id="exampleRadios1" value="option2">
+    <div class="form-check px-5">
+        <input class="form-check-input" type="radio" name="answer-{{this.id}}" id="radio-{{this.answerThree}}"
+            value="{{this.answerThree}}">
         <label class="form-check-label" for="exampleRadios1">
             {{this.answerThree}}
         </label>
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="answerFour" id="exampleRadios1" value="option4">
+    <div class="form-check px-5">
+        <input class="form-check-input" type="radio" name="answer-{{this.id}}" id="radio-{{this.answerFour}}"
+            value="{{this.answerFour}}">
         <label class="form-check-label" for="exampleRadios1">
             {{this.answerFour}}
         </label>
@@ -34,7 +38,31 @@
 
 
 {{/each}}
+<div>
+    <div class="mx-auto mt-4" style="width: 200px;">
+        <button type="button" id="submit" class="btn btn-primary">Submit Answers</button>
+    </div>
+</div>
 
+<script>
+    $('#submit').on('click', function () {
+        const allAnswers = [];
+        for (let i = 4; i < 7; i++) {
+            const answer = $(`input[name='answer-${i}']:checked`).val();
+            allAnswers.push(answer)
+        }
+        $.ajax({
+            method: "GET",
+            url: "/api/questions/answers/{{quizId}}"
+        }).then(results => {
+            console.log(results)
+            //compare two arrays against their values 
+            //does index match the correct answers array?
+            //loop or map? 
+        })
+    })
+
+</script>
 
 {{!-- <div class="form-group col-md-4">
       <label for="inputState">State</label>
