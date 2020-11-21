@@ -1,0 +1,29 @@
+
+{{> navbar user }}
+
+  <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Quiz Name</th>
+      <th scope="col">Score</th>
+      <th scope="col">Number of Questions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+{{#each scores}}
+    <tr>
+      <th scope="row">{{createdAt}}</th>
+      <td>{{'Quiz.name'}}</td>
+      <td>{{results}}</td>
+      <td>{{numQuestions}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<script type="text/javascript" src="js/members.js"></script>
+
+
+

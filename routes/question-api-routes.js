@@ -45,7 +45,7 @@ module.exports = function(app) {
       where: {
         QuizId: req.params.QuizId
       },
-      attributes: ['correctAnswer']
+      attributes: ['correctAnswer', 'id']
     })
       .then(function(dbPost) {
         res.json(dbPost);

@@ -57,7 +57,7 @@ module.exports = function(app) {
       },
     }).then(function(questions) {
       console.log(questions);
-      res.render('takequiz', { user: req.user, questions: questions, quizId: questions[0].QuizId});
+      res.render('takequiz', { user: req.user, questions: questions, QuizId: questions[0].QuizId});
     });
     // pass in after req.user the results from the db call
 
@@ -80,8 +80,19 @@ module.exports = function(app) {
     res.render('quizzes', { user: req.user });
   });
 
-  app.get('/members', isAuthenticated, function(req, res) {
-    res.render('members', { user: req.user });
+  app.get('/results', isAuthenticated, function(req, res) {
+    db.Score.findAll({
+      raw: true,
+      
+      where: {
+        UserId: req.user.id
+      },
+      include: [db.Quiz]
+    }).then(function(scores) {
+      console.log(scores);
+      res.render('results', { user: req.user, scores: scores });
+
+    });
   });
 
 

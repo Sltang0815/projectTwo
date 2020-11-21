@@ -17,4 +17,11 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });
+
+  app.post('/api/results', function(req, res) {
+    db.Score.create({UserId: req.user.id,...req.body}).then(function(dbScore) {
+      res.json(dbScore);
+    });
+  });
 };
+
