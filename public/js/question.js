@@ -80,7 +80,7 @@ $(document).ready(function() {
     }
   }
 
-  // Submits a new question and brings user to blog page upon completion
+  // Submits a new question and brings user to quiz page upon completion
   function submitQuestion(question) {
     $.post('/api/questions', question, function() {
       window.location.href = '/quiz';
@@ -143,7 +143,7 @@ $(document).ready(function() {
     return listOption;
   }
 
-  // Update a given question, bring user to the blog page when done
+  // Update a given question, bring user to the quiz page when done
   function updateQuestion(question) {
     $.ajax({
       method: 'PUT',

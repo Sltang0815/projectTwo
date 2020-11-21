@@ -1,14 +1,15 @@
 $(document).ready(function() {
-  // blogContainer holds all of our questions
-  var blogContainer = $('.blog-container');
+  // quizContainer holds all of our questions
+  var quizContainer = $('.quiz-container');
   var questionCategorySelect = $('#category');
   // Click events for the edit and delete buttons
   $(document).on('click', 'button.delete', handleQuestionDelete);
   $(document).on('click', 'button.edit', handleQuestionEdit);
+  $(document).on('click', 'button.quizBtn', handleQuizTaking);
   // Variable to hold our questions
   var questions;
 
-  // The code below handles the case where we want to get blog questions for a specific quiz
+  // The code below handles the case where we want to get quiz questions for a specific quiz
   // Looks for a query param in the url for quiz_id
   var url = window.location.search;
   var quizId;
@@ -51,19 +52,18 @@ $(document).ready(function() {
 
 
 
-  // InitializeRows handles appending all of our constructed question HTML inside blogContainer
+  // InitializeRows handles appending all of our constructed question HTML inside quizContainer
   function initializeRows() {
-    blogContainer.empty();
+    quizContainer.empty();
     var questionsToAdd = [];
     for (var i = 0; i < questions.length; i++) {
       questionsToAdd.push(createNewRow(questions[i]));
     }
-    blogContainer.append(questionsToAdd);
+    quizContainer.append(questionsToAdd);
   }
 
   // This function constructs a question's HTML
   function createNewRow(question) {
-    // var formattedDate = new Date(question.createdAt).toLocaleDateString();
     var newQuestionCard = $('<div>');
     newQuestionCard.addClass('card');
     var newQuestionCardHeading = $('<div>');
@@ -77,10 +77,12 @@ $(document).ready(function() {
     let quizBtn = $('<button>');
     quizBtn.text('Take quiz');
     quizBtn.addClass('quizBtn btn btn-primary');
+    quizBtn.attr('data-quiz', question.QuizId);
     var newQuestionTitle = $('<h2>');
-    // var newQuestionDate = $('<small>');
     var newQuestionQuiz = $('<h5>');
     newQuestionQuiz.text('Quiz Name: ' + question.Quiz.name);
+    let questionName = $('<h5>');
+    questionName.text('Question: ' + question.id);
     newQuestionQuiz.css({
       float: 'right',
       color: 'blue',
@@ -88,12 +90,7 @@ $(document).ready(function() {
       '-10px'
     });
     var newQuestionCardBody = $('<div>');
-    // newQuestionCardBody.addClass('card-body');
     var newQuestionBody = $('<p>');
-    // newQuestionTitle.text(question.title + ' ');
-    // newQuestionBody.text(question.body);
-    // newQuestionDate.text(formattedDate);
-    // newQuestionTitle.append(newQuestionDate);
     newQuestionCardHeading.append(deleteBtn);
     newQuestionCardHeading.append(editBtn);
     newQuestionCardHeading.append(quizBtn);
@@ -103,6 +100,8 @@ $(document).ready(function() {
     newQuestionCard.append(newQuestionCardHeading);
     newQuestionCard.append(newQuestionCardBody);
     newQuestionCard.data('question', question);
+    newQuestionCard.data('quiz', question.QuizId);
+    newQuestionCardHeading.append(questionName);
     return newQuestionCard;
   }
 
@@ -124,6 +123,13 @@ $(document).ready(function() {
     window.location.href = '/question?question_id=' + currentQuestion.id;
   }
 
+  function handleQuizTaking() {
+    let quizId = $(this).attr('data-quiz');
+    window.location.href = '/takequiz/' + quizId;
+
+  }
+
+
   // This function displays a message when there are no questions
   function displayEmpty(id) {
     var query = window.location.search;
@@ -131,12 +137,12 @@ $(document).ready(function() {
     if (id) {
       partial = ' for Quiz #' + id;
     }
-    blogContainer.empty();
+    quizContainer.empty();
     var messageH2 = $('<h2>');
     messageH2.css({ 'text-align': 'center', 'margin-top': '50px' });
     messageH2.html('No quizzes yet' + partial + ', navigate <a href=\'/question' + query +
     '\'>here</a> in order to get started.');
-    blogContainer.append(messageH2);
+    quizContainer.append(messageH2);
   }
 
 });
