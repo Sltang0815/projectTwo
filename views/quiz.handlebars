@@ -1,7 +1,7 @@
 {{> navbar user }}
 
 
-  <div class="container blog">
+  <div class="container quiz">
     <div class="row">
       <div class="col-md-2 col-sm-2">
         <a class="btn btn-light" href="/question">New Question</a>
@@ -11,9 +11,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 blog-container">
+      <div class="col-md-12 quiz-container">
       </div>
     </div>
+  <div>
+    <div class="mx-auto mt-4" style="width: 200px;">
+        <button type="button" href="/takequiz/" attr="data-quiz question.QuizId" id="submit" class="quizBtn btn btn-primary">Take Quiz</button>
+    </div>
+</div>
+
   </div>
   <!-- Custom Script -->
   <script src="js/quiz.js" type="text/javascript"></script>
