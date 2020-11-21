@@ -46,51 +46,32 @@
 
 <script>
     $('#submit').on('click', function () {
-        const allAnswers = [];
-        for (let i = 4; i < 7; i++) {
-            const answer = $(`input[name='answer-${i}']:checked`).val();
-            allAnswers.push(answer)
-        }
         $.ajax({
             method: "GET",
-            url: "/api/questions/answers/{{quizId}}"
-        }).then(results => {
-            console.log(results)
-            //compare two arrays against their values 
+            url: "/api/questions/answers/{{QuizId}}"
+        }).then(response => {
+            console.log(response)
+            //compare two arrays against their values
             //does index match the correct answers array?
-            //loop or map? 
+            let numQuestions = response.length;
+            let results = 0;
+            for (let i = 0; i < numQuestions; i++) {
+                const question = response[i];
+                const answer = $(`input[name='answer-${question.id}']:checked`).val();
+                if (answer === question.correctAnswer) {
+                    results++;
+                }
+            }
+            console.log(results)
+            $.ajax({
+                method: "POST",
+                url: "/api/results",
+                data: { results: results, numQuestions: numQuestions, QuizId: "{{QuizId}}" }
+            }).then(response => {
+                window.location.href="/results"
+            })
         })
+
     })
 
 </script>
-
-{{!-- <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-    </div> --}}
-
-
-
-
-{{!-- <div class="input-group">
-    <input id="answerOne" name="answerOne" placeholder="Answer a" type="radio" class="form-control"
-        aria-label="Text input with radio button">
-</div>
-<div class="input-group">
-    <input id="answerTwo" name="answerTwo" placeholder="Answer b" type="text" class="form-control"
-        aria-label="Text input with radio button">
-</div>
-<div class="input-group">
-    <input id="answerThree" name="answerThree" placeholder="Answer c" type="text" class="form-control"
-        aria-label="Text input with radio button">
-</div>
-<div class="input-group">
-    <input id="answerFour" name="answerFour" placeholder="Answer d" type="text" class="form-control"
-        aria-label="Text input with radio button">
-</div> --}}
-
-{{!-- for handlebars {{#each question and radio button for each individual}}
-{{!-- create logic for checking the correct answer and push to score --}}
