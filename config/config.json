@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "$n@k3t0wn!$myH0m",
+    "password": "",
     "database": "quizzer",
     "host": "127.0.0.1",
     "port": 3306,
