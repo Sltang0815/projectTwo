@@ -40,6 +40,18 @@ module.exports = function(app) {
       });
   });
 
+  app.get('/api/questions/answers/:QuizId', function(req, res) {
+    db.Question.findAll({
+      where: {
+        QuizId: req.params.QuizId
+      },
+      attributes: ['correctAnswer']
+    })
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
+
   // Get route for retrieving a single question
   app.get('/api/questions/:id', function(req, res) {
     // Here we add an "include" property to our options in our findOne query
