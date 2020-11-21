@@ -1,29 +1,28 @@
 {{> navbar user }}
 
 
-  <div class="container quiz">
-    <div class="row">
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/question">New Question</a>
-      </div>
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/quizzes">Manage Quizzes</a>
-      </div>
+<div class="container quiz">
+  <div class="row">
+    <div class="col-md-2 col-sm-2">
+      <a class="btn btn-light" href="/question">New Question</a>
     </div>
-    <div class="row">
-      <div class="col-md-12 quiz-container">
-      </div>
+    <div class="col-md-2 col-sm-2">
+      <a class="btn btn-light" href="/quizzes">Manage Quizzes</a>
     </div>
-  <div>
-    <div class="mx-auto mt-4" style="width: 200px;">
-        <button type="button" href="/takequiz/" attr="data-quiz question.QuizId" id="submit" class="quizBtn btn btn-primary">Take Quiz</button>
-    </div>
-</div>
-
   </div>
-  <!-- Custom Script -->
-  <script src="js/quiz.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-md-12 quiz-container">
+    </div>
+  </div>
+  <div>
+    {{#if QuizId}}
+    <div class="mx-auto mt-4" style="width: 200px;">
+      <button type="button" data-quiz='{{QuizId}}' id="submit"
+        class="quizBtn btn btn-primary">Take This Quiz</button>
+    </div>
+    {{/if}}
+  </div>
 
-
-
-
+</div>
+<!-- Custom Script -->
+<script src="js/quiz.js" type="text/javascript"></script>

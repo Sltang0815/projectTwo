@@ -2,10 +2,12 @@ $(document).ready(function() {
   // quizContainer holds all of our questions
   var quizContainer = $('.quiz-container');
   var questionCategorySelect = $('#category');
+  
   // Click events for the edit and delete buttons
   $(document).on('click', 'button.delete', handleQuestionDelete);
   $(document).on('click', 'button.edit', handleQuestionEdit);
   $(document).on('click', 'button.quizBtn', handleQuizTaking);
+  
   // Variable to hold our questions
   var questions;
 
@@ -126,7 +128,8 @@ $(document).ready(function() {
   function handleQuizTaking() {
     let quizId = $(this).attr('data-quiz');
     window.location.href = '/takequiz/' + quizId;
-
+    console.log(quizId);
+    console.log("Clicked on Take Quiz");
   }
 
 
