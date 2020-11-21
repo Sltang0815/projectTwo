@@ -44,6 +44,7 @@ $(document).ready(function() {
     }
     newTr.append('<td><a href=\'/quiz?quiz_id=' + quizData.id + '\'>Go to Questions</a></td>');
     newTr.append('<td><a href=\'/question?quiz_id=' + quizData.id + '\'>Create a Question</a></td>');
+    newTr.append('<td><a href=\'/takequiz/' + quizData.id + '\'>Take a Quiz</a></td>');
     newTr.append('<td><a style=\'cursor:pointer;color:red\' class=\'delete-quiz\'>Delete Quiz</a></td>');
     return newTr;
   }

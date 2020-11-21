@@ -10,26 +10,26 @@ const db = require('../models');
 
 // Routes
 // =============================================================
-module.exports = function(app) {
+module.exports = function (app) {
 
   /**
  * Home Page
  */
-  app.get('/', function(req, res) {
+  app.get('/', function (req, res) {
     res.render('index', { user: req.user });
   });
 
   /**
  * Home Page, again
  */
-  app.get('/home', function(req, res) {
+  app.get('/home', function (req, res) {
     res.render('index', { user: req.user });
   });
 
   /**
  * Signup page
  */
-  app.get('/signup', function(req, res) {
+  app.get('/signup', function (req, res) {
     if (req.user) {
       res.redirect('/');
     } else {
@@ -40,7 +40,7 @@ module.exports = function(app) {
   /**
  * Login page
  */
-  app.get('/login', function(req, res) {
+  app.get('/login', function (req, res) {
     if (req.user) {
       res.redirect('/');
     } else {
@@ -48,16 +48,16 @@ module.exports = function(app) {
     }
   });
 
-  app.get('/takequiz/:id', isAuthenticated, function(req, res) {
+  app.get('/takequiz/:id', isAuthenticated, function (req, res) {
     // api call to db.Quiz passing in id
     db.Question.findAll({
       raw: true,
       where: {
         QuizId: req.params.id
       },
-    }).then(function(questions) {
+    }).then(function (questions) {
       console.log(questions);
-      res.render('takequiz', { user: req.user, questions: questions, QuizId: questions[0].QuizId});
+      res.render('takequiz', { user: req.user, questions: questions, QuizId: questions[0].QuizId });
     });
     // pass in after req.user the results from the db call
 
@@ -66,34 +66,38 @@ module.exports = function(app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   // index route loads view.html
-  app.get('/quiz', isAuthenticated, function(req, res) {
+  app.get('/quiz', isAuthenticated, function (req, res) {
     res.render('quiz', { user: req.user });
   });
 
   // cms route loads cms.html
-  app.get('/question', isAuthenticated, function(req, res) {
+  app.get('/question', isAuthenticated, function (req, res) {
     res.render('question', { user: req.user });
   });
 
 
-  app.get('/quizzes', isAuthenticated, function(req, res) {
+  app.get('/quizzes', isAuthenticated, function (req, res) {
     res.render('quizzes', { user: req.user });
   });
 
-  app.get('/results', isAuthenticated, function(req, res) {
+  app.get('/results', isAuthenticated, function (req, res) {
     db.Score.findAll({
       raw: true,
-      
+
       where: {
         UserId: req.user.id
       },
       include: [db.Quiz]
-    }).then(function(scores) {
+    }).then(function (scores) {
       console.log(scores);
-      res.render('results', { user: req.user, scores: scores });
-
+      res.render('results', {
+        user: req.user, scores: scores.map(score => {
+          return {
+            progress: (score.results / score.numQuestions) * 100,
+            ...score
+          };
+        })
+      });
     });
   });
-
-
 };
