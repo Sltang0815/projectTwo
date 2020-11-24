@@ -1,48 +1,43 @@
 {{> navbar user }}
 
-	<div class="container">
-		<div class="row mt-4">
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/quiz">Manage Questions</a>
-      </div>
-			<div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/question">New Question</a>
-      </div>
-    </div>
-		<div class="row">
-			<div class="col-md-8 offset-md-2">
-				<div class="quiz-container">
-					<h1>Quizzes</h1>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th># of Questions</th>
-								<th>See Quiz's Questions</th>
-								<th>New Question</th>
-								<th>Take Quiz</th>
-								<th>Delete Quiz</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="form-row">
-								<form id="quiz-form">
-									<td colspan="4">
-										<input placeholder="Enter a name" id="quiz-name" type="text" />
-									</td>
-									<td><button type="submit" class="btn btn-success">Create Quiz</button>
-									</td>
-								</form>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+<div class="container">
+	<div class="row mt-4">
+		<div class="col-md-8">
+			<a class="btn btn-light btn btn-outline-primary" href="/quiz">Manage Questions</a>
+		</div>
+			<a class="btn btn-light btn btn-outline-primary" href="/question">New Question</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 offset-md-2">
+			<div class="quiz-container">
+				<h1>Quizzes</h1>
+				<table class="table table-striped text-nowrap">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th># of Questions</th>
+							<th>See Quiz's Questions</th>
+							<th>New Question</th>
+							<th>Think you're ready?</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="form-row">
+							<form id="quiz-form">
+								<td colspan="5">
+									<input placeholder="New Quiz Name" id="quiz-name" type="text" />
+								</td>
+								<td><button type="submit" class="btn btn-success text-nowrap">Create Quiz</button>
+								</td>
+							</form>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
-		</d>
-		<!-- Custom Script -->
-		<script src="js/quizzes.js" type="text/javascript"></script>
-
-
-
-
+	</div>
+	</d>
+	<!-- Custom Script -->
+	<script src="js/quizzes.js" type="text/javascript"></script>
