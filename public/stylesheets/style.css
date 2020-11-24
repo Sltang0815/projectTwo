@@ -162,8 +162,23 @@ p {
   text-align: center;
   transition: .2s;
 
+.resultsBody{
+  background-color:gainsboro;
+}
+
+.table{
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  
+}
+
+.row{
+  margin:25px;
 }
 
 footer {
   text-align: center;
+  
 }
