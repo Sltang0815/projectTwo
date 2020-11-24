@@ -5,6 +5,11 @@
   font-weight: bold;
 }
 
+.nav-logo {
+  width: 60px;
+  height: 55px;
+}
+
 /* logo styling */
 .logo {
   display: block;
@@ -128,6 +133,35 @@ p {
   border-radius: 25px;
   border: none;
   background-color: #ebe8e8;
+}
+
+.btn-style {
+  padding: 10px 10px;
+  background-color: #7ea5d4;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  text-align: center;
+  font-family: "quicksand", sans-serif;
+  font-size: medium;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.btn-style:hover {
+  padding: 10px 10px;
+  background-color: #05499c;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  text-align: center;
+  transition: .2s;
+
 }
 
 footer {

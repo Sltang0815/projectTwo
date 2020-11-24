@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg shadow navbar-dark nav-bg">
-    <a class="navbar-brand brand-text" href="/">Quizzical</a>
+    <a class="navbar-brand brand-text" href="/">Quizzical <img class="nav-logo" src="/nav-bar-logo.png" alt="quizzical-logo-owl"></a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,13 +15,13 @@
             {{#if username }}
             
             <li class="nav-item">
-                <a class="nav-link" href="/quizzes">Quizzes</a>
+                <a class="nav-link btn-style" href="/quizzes">Quizzes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/results">Results</a>
+                <a class="nav-link btn-style" href="/results">Results</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/auth/logout">Logout</a>
+                <a class="nav-link btn-style" href="/auth/logout">Logout</a>
             </li>
             {{else}}
             <li class="nav-item">
