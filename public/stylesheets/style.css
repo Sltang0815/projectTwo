@@ -1,17 +1,135 @@
-form.signup,
-form.login {
-  margin-top: 50px;
+
+/* navbar brand text */
+.brand-text {
+  font-size: 40px;
+  font-weight: bold;
 }
 
-.forum-post-card {
-  width: 100%;
+/* logo styling */
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 220px;
+  height: 200px;
 }
 
-.forum-post {
-  width: 100%;
+/* gradient for background on each page */
+body {
+  background: -webkit-linear-gradient(to right, #f3f3f3, #c0d9f5);
+  background: linear-gradient(to right, #f3f3f3, #c0d9f5);
+  font-family: "quicksand", sans-serif;
+}
+
+p {
+  font-family: "quicksand", sans-serif;
+  font-size: large;
+  font-weight: 500;
+}
+
+/* navbar color */
+.nav-bg {
+  background-color: #6a95db;
+}
+
+/* login button style */
+.log-btn {
+  padding: 10px 10px;
+  background-color: #7ea5d4;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  text-align: center;
+  font-family: "quicksand", sans-serif;
+  font-size: medium;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.log-btn:hover {
+  padding: 10px 10px;
+  background-color: #05499c;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  text-align: center;
+  transition: .2s;
+
+}
+
+/* signup button style */
+.signup-btn {
+  padding: 10px 10px;
+  background-color: #7ea5d4;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  text-align: center;
+  margin-left: 10px;
+  font-family: "quicksand", sans-serif;
+  font-size: medium;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.signup-btn:hover {
+  padding: 10px 10px;
+  background-color: #05499c;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  text-align: center;
+  transition: .2s;
+}
+
+/* lets get quizzical button */
+.start-btn {
+  padding: 10px 10px;
+  background-color: #7ea5d4;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 500px;
+  text-align: center;
+  margin: auto;
+  font-family: "quicksand", sans-serif;
+  font-size: medium;
+  font-weight: 600;
+
+}
+
+.start-btn:hover {
+  padding: 10px 10px;
+  background-color: #05499c;
+  color: #ffffff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  width: 500px;
+  text-align: center;
+  transition: .2s;
+}
+
+/* self-explanatory */
+.welcome-text {
+  text-align: center;
+}
+
+.form-style {
+  border-radius: 25px;
+  border: none;
+  background-color: #ebe8e8;
 }
 
 footer {
   text-align: center;
-  background-color: black;
 }

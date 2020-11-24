@@ -89,3 +89,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+QUIZZICAL
+The following application helps users learn the Times Tables
+Create 'one' Times Table Quiz
+Create 'multiple' Times Tables Quizzes<
+Take a Time Table Quiz multiple times
+Track progress on 'one' Time Table Quiz
+Track progress on 'multiple' Times Table Quizzes
+Taking a Times Table Quiz
+Options the user can select
+Choose which Times Tables to quiz on
+Choose one equation at a time to quiz on
+Choose the entire Times Table to quiz on
