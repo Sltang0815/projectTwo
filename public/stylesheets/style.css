@@ -161,6 +161,7 @@ p {
   width: 100px;
   text-align: center;
   transition: .2s;
+}
 
 .resultsBody{
   background-color:gainsboro;
