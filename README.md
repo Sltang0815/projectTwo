@@ -1,15 +1,15 @@
 
-# 💡 Project Title: Math flash cards
+# 💡 Project Title: Quizzical
 ## 🕹 Demo:
 
-![Demo of application](public/assets/________.gif)
+![Demo of application](public/assets/quizzical_DEMO.gif)
 
-Video of demo: [____________________](https://drive.google.com/) 
+Video of demo: [Quizzical DEMO](https://drive.google.com/file/d/1LRuYjWuRF2lmxyj05bxJvI_I_IMj4WL3/view) 
 
 ![License](https://img.shields.io/badge/License-MIT-yellow) 
 ## 👤 Authors: 
 ```
-Joseph Jepson, Alex Dospinoiu, Jake Ehmann
+Steven Tang, Joseph Jepson, Alex Dospinoiu, Jake Ehmann
 ```
 
   ## 📜 Table of Contents: 
@@ -29,47 +29,31 @@ Joseph Jepson, Alex Dospinoiu, Jake Ehmann
   * [License](#License) 
 
   ## Description: 
-  ```
-  ```
- 
+  Quizzical is an easy to use quiz creator! Users can create quizzes, create questions, and even track their own progress per quiz. Each quiz stores the user score, too!
 
-![_____________](________________________.png)
+![Image of DEMO](public/assets/DEMO_img.png)
 
-[View Deployment](https://magic-gathering-app.herokuapp.com/)
-
+[View Quizzical Deployment](https://magic-gathering-app.herokuapp.com/)
 
 ## Installation: 
- ```
- ```
+ Clone the repo. Run 'npm install'.
 
 ## Usage: 
- ```
- ```
+Use schema to create DB in mySql Workbench. Put in your local password for workbench.
 
 ## Credits: 
 
-* 👤 [Joseph Jepson](https://github.com/alligatormonday) - worked together to help complete this assignment. 
-* 👤 [Alex Dospinoiu](https://github.com/adospinoiu) - worked together to help complete this assignment. 
-* 👤 [Jake Ehmann](https://github.com/jakeehmann42) - worked together to help complete this assignment. 
-* 👤 [Steven Tang](https://github.com/Sltang0815) - worked together to help complete this assignment. 
-
-
-## Testing: 
-
-  ## Contact: 
-  
- 
-  * 💌  Email: 
- 
-  * 👤  GitHub Username: []() 
-  
+* 👤 [Joseph Jepson](https://github.com/alligatormonday) - worked together to help complete this project
+* 👤 [Alex Dospinoiu](https://github.com/adospinoiu) - worked together to help complete this project
+* 👤 [Jake Ehmann](https://github.com/jakeehmann42) - worked together to help complete this project
+* 👤 [Steven Tang](https://github.com/Sltang0815) - worked together to help complete this project
 
   ## License: 
  
   
     MIT License
 
-Copyright (c) 2020 Joseph Jepson
+Copyright (c) 2020 Steven Tang, Joseph Jepson, Alex Dospinoiu, Jake Ehmann
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -88,16 +72,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-QUIZZICAL
-The following application helps users learn the Times Tables
-Create 'one' Times Table Quiz
-Create 'multiple' Times Tables Quizzes<
-Take a Time Table Quiz multiple times
-Track progress on 'one' Time Table Quiz
-Track progress on 'multiple' Times Table Quizzes
-Taking a Times Table Quiz
-Options the user can select
-Choose which Times Tables to quiz on
-Choose one equation at a time to quiz on
-Choose the entire Times Table to quiz on
